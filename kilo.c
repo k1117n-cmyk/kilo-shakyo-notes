@@ -103,7 +103,7 @@ int editorReadKey(void) {
 				case 'F': return END_KEY;
 			}
 		}
-	} else if (seq[0] == '0') {
+	} else if (seq[0] == 'O') {
 		switch (seq[1]) {
 			case 'H': return HOME_KEY;
 			case 'F': return END_KEY;
@@ -209,7 +209,6 @@ void editorRefreshScreen(void) {
 	snprintf(buf, sizeof(buf), "\x1b[%d;%dH", E.cy + 1, E.cx + 1);
 	abAppend(&ab, buf, strlen(buf));
 
-	abAppend(&ab, "\x1b[H", 3);
 	abAppend(&ab, "\x1b[?25h", 6);
 
 	write(STDOUT_FILENO, ab.b, ab.len);
