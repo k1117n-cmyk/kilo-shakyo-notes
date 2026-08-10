@@ -1,92 +1,92 @@
-# Kilo Tutorial Shakyo Notes
+# Kilo チュートリアル写経メモ
 
-This repository contains my handwritten implementation of `kilo.c` while following [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) by snaptoken.
+このリポジトリは、snaptoken 氏の [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) を読みながら写経した `kilo.c` と、その学習メモをまとめたものです。
 
-The purpose of this repository is learning. It is not an official translation or redistribution of the tutorial. The notes here are written as supplementary material for Japanese readers who want to follow the same tutorial and compare where they may get stuck.
+目的は学習です。元チュートリアルの公式翻訳や再配布ではありません。ここに置いているメモは、同じチュートリアルを進める日本語読者が、つまずきやすい点を確認したり、自分の理解と見比べたりするための補足資料です。
 
-## About The Tutorial
+## チュートリアルについて
 
-[Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) is a step-by-step C tutorial that builds a small terminal text editor based on [antirez's kilo](https://github.com/antirez/kilo).
+[Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) は、[antirez 氏の kilo](https://github.com/antirez/kilo) をもとに、小さなターミナル用テキストエディタを C で段階的に作っていくチュートリアルです。
 
-The tutorial is especially useful for learning:
+このチュートリアルでは、特に次のような内容を学べます。
 
-- Raw terminal mode with `termios`
-- Reading keypresses directly from the terminal
-- ANSI escape sequences
-- Screen redraw logic
-- Dynamic row buffers
-- File loading and saving
-- Search
-- Syntax highlighting
+- `termios` を使った Raw mode
+- ターミナルからのキー入力の直接読み取り
+- ANSI エスケープシーケンス
+- 画面の再描画処理
+- 動的な行バッファ
+- ファイルの読み込みと保存
+- 検索
+- シンタックスハイライト
 
-## Files
+## ファイル構成
 
-- `kilo.c`: the text editor implementation written while following the tutorial
-- `makefile`: build rules for `kilo.c`
-- `kilo_learning_notes.md`: Japanese learning notes, explanations, and common pitfalls
-- `articles.md`: earlier notes about specific issues encountered during the tutorial
+- `kilo.c`: チュートリアルを進めながら写経したテキストエディタ本体
+- `makefile`: `kilo.c` をビルドするためのルール
+- `kilo_learning_notes.md`: 日本語の学習メモ、補足説明、つまずきやすい点の整理
+- `articles.md`: チュートリアル中に遭遇した個別の問題についての以前のメモ
 
-Some backup or experiment files may exist while learning. The main files to read are `kilo.c` and `kilo_learning_notes.md`.
+学習中のバックアップファイルや実験用ファイルが含まれている場合があります。主に読む対象は `kilo.c` と `kilo_learning_notes.md` です。
 
-## Build
+## ビルド方法
 
-This project uses a C compiler and `make`.
+このプロジェクトは C コンパイラと `make` を使います。
 
 ```sh
 make
 ```
 
-This builds an executable named `kilo`.
+実行ファイル `kilo` が生成されます。
 
-To open a file:
+ファイルを開く場合は次のように実行します。
 
 ```sh
 ./kilo kilo.c
 ```
 
-To remove the built executable:
+生成された実行ファイルを削除する場合は、次のコマンドを使います。
 
 ```sh
 make clean
 ```
 
-The current build command is:
+現在のビルドコマンドは次の通りです。
 
 ```sh
 $(CC) kilo.c -o kilo -Wall -Wextra -pedantic -std=c99
 ```
 
-Warnings are intentionally enabled because they are useful while learning C.
+C の学習中に警告を確認できるよう、警告オプションを意図的に有効にしています。
 
-## Learning Notes
+## 学習メモ
 
-The main supplementary document is [kilo_learning_notes.md](./kilo_learning_notes.md).
+主な補足ドキュメントは [kilo_learning_notes.md](./kilo_learning_notes.md) です。
 
-It covers:
+このメモでは、次のような内容を扱っています。
 
-- How to read the original step-by-step diff format
-- Why deleted lines can be easy to miss
-- The difference between `void func()` and `void func(void)` in C
-- A cursor bug caused by leaving an extra `\x1b[H`
-- The easy-to-miss difference between `O` and `0` in escape sequence handling
-- A high-level walkthrough of the finished `kilo.c`
+- 元記事の step ごとの差分形式の読み方
+- 削除された行を見落としやすい理由
+- C における `void func()` と `void func(void)` の違い
+- 余分な `\x1b[H` を残したことで起きたカーソル位置のバグ
+- エスケープシーケンス処理で見落としやすい `O` と `0` の違い
+- 完成版 `kilo.c` の大まかな構造
 
-## Common Pitfalls
+## つまずきやすかった点
 
-While following the tutorial, I ran into a few issues that may be useful for other learners.
+チュートリアルを進める中で、他の学習者にも参考になりそうな問題にいくつか遭遇しました。
 
-One important example was a cursor that stayed fixed in the upper-left corner. The direct cause was an old cursor-positioning escape sequence left in `editorRefreshScreen()`. The code compiled, but the runtime behavior was wrong.
+たとえば、カーソルが左上に固定されたまま動かない問題がありました。直接の原因は、`editorRefreshScreen()` に古いカーソル位置指定のエスケープシーケンスが残っていたことです。コードはコンパイルできましたが、実行時の挙動が正しくありませんでした。
 
-Another example was the visual similarity between uppercase `O` and zero `0` in escape sequence parsing. This kind of typo does not always produce a compiler error, but it can make specific keys stop working.
+また、エスケープシーケンスの解析で、英大文字の `O` と数字の `0` を見間違えたこともありました。このようなタイプミスはコンパイルエラーにならないことがありますが、特定のキーが正しく動かない原因になります。
 
-These are documented in more detail in [kilo_learning_notes.md](./kilo_learning_notes.md).
+これらの内容は [kilo_learning_notes.md](./kilo_learning_notes.md) にもう少し詳しくまとめています。
 
-## Attribution
+## 参考元
 
-This repository is based on learning from:
+このリポジトリは、次の資料をもとに学習した内容です。
 
-- Tutorial: [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) by snaptoken
-- Original editor: [antirez's kilo](https://github.com/antirez/kilo)
-- Tutorial appendix: [Appendices](https://viewsourcecode.org/snaptoken/kilo/08.appendices.html)
+- チュートリアル: snaptoken 氏の [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html)
+- 元になったエディタ: [antirez's kilo](https://github.com/antirez/kilo)
+- チュートリアル付録: [Appendices](https://viewsourcecode.org/snaptoken/kilo/08.appendices.html)
 
-Please refer to the original tutorial and source repositories for their respective licenses. This repository's notes are intended as personal learning notes and supplementary commentary.
+各資料のライセンスについては、元のチュートリアルやソースリポジトリを参照してください。このリポジトリのメモは、個人的な学習メモと補足説明を目的としています。
