@@ -81,6 +81,12 @@ C の学習中に警告を確認できるよう、警告オプションを意図
 
 これらの内容は [kilo_learning_notes.md](./kilo_learning_notes.md) にもう少し詳しくまとめています。
 
+## 公開記事
+
+このリポジトリで学んだ内容を、UNIX Cafe のブログ記事にもまとめました。
+
+- [Build Your Own Text Editor を写経して kilo を学んだ](https://pc-fan.net/kilo-shakyo-learning-notes/)
+
 ## 参考元
 
 このリポジトリは、次の資料をもとに学習した内容です。
