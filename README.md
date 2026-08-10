@@ -1,5 +1,9 @@
 # Kilo チュートリアル写経メモ
 
+![Language: C](https://img.shields.io/badge/Language-C-blue)
+![Topic: Terminal](https://img.shields.io/badge/Topic-Terminal-lightgrey)
+![Purpose: Learning](https://img.shields.io/badge/Purpose-Learning-green)
+
 このリポジトリは、snaptoken 氏の [Build Your Own Text Editor](https://viewsourcecode.org/snaptoken/kilo/index.html) を読みながら写経した `kilo.c` と、その学習メモをまとめたものです。
 
 目的は学習です。元チュートリアルの公式翻訳や再配布ではありません。ここに置いているメモは、同じチュートリアルを進める日本語読者が、つまずきやすい点を確認したり、自分の理解と見比べたりするための補足資料です。
