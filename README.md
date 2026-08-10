@@ -24,9 +24,9 @@
 - `kilo.c`: チュートリアルを進めながら写経したテキストエディタ本体
 - `makefile`: `kilo.c` をビルドするためのルール
 - `kilo_learning_notes.md`: 日本語の学習メモ、補足説明、つまずきやすい点の整理
-- `articles.md`: チュートリアル中に遭遇した個別の問題についての以前のメモ
+- `kilo_explained.md`: 完成版 `kilo.c` を読むための学習ガイド
 
-学習中のバックアップファイルや実験用ファイルが含まれている場合があります。主に読む対象は `kilo.c` と `kilo_learning_notes.md` です。
+主に読む対象は `kilo.c`、`kilo_learning_notes.md`、`kilo_explained.md` です。ビルド済みの実行ファイルや個人的な実験用ファイルは Git の追跡対象から外しています。
 
 ## ビルド方法
 

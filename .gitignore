@@ -1,5 +1,14 @@
-kilo
-test.txt
-sizeof
+# Build artifacts
+/kilo
+/sizeof
+*.o
+*.out
+
+# Local scratch files
+/test.txt
+/sizeof.c
+/kilo_bk.c
+
+# Editor / OS files
 *.swp
-kilo_bk.c
+.DS_Store
